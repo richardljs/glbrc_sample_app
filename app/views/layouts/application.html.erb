@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GlbrcApp</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div class="header">
+    <div class="container">
+      <div class="nav pull-left">
+      </div>
+      <div class="nav pull-right" style="font-size: 18px;">
+        <% if current_user %> 
+            <%= current_user.login %>
+            <%= link_to "Log out", logout_path, method: "delete" %>
+        <% else %> 
+            <%= link_to "Login", 'login' %>
+            <%= link_to "Signup", 'signup' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+	<%= yield %>
+
+</body>
+</html>

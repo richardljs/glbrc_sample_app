@@ -1,0 +1,35 @@
+<div class="apps">
+  <div class="container">
+    <% if current_user %>
+      <% if session[:show_all] %>
+        <%= link_to "Done Editing", :controller => "apps", :action => "done" %>
+      <% else %>
+        <%= link_to "Edit Apps on Dashboard", :controller => "apps", :action => "edit" %>
+      <% end %>
+    <% end %>
+    <div class="row">
+      <% current_user.apps.each do |app|%> 
+        <% if app.default_status == 'Yes' || session[:show_all] %>
+          <div class="item col-md-4">
+            <% if app.default_status == 'No' %>
+            <div class="app-info" style="opacity: 0.5;">
+            <% else %>
+            <div class="app-info">
+            <% end %>
+              <h2><%= app.name %></h2> 
+              <p><%= app.description %></p>
+              <p><%= app.color %></p>
+            </div>
+            <% if session[:show_all] %>
+              <% if app.default_status == 'No' %>
+                <%= link_to "+", add_app_path(app) %>
+              <% else %>
+                <%= link_to "-", hide_app_path(app) %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %> 
+    </div>
+  </div>
+</div>
